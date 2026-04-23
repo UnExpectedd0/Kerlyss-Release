@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerlyss | Unified Music Ecosystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0c0c0c;
+            --accent-purple: #a855f7;
+            --accent-cyan: #22d3ee;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .background-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(12, 12, 12, 0) 70%);
+            z-index: -1;
+            filter: blur(100px);
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #fff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 50px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .download-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 40px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .download-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-purple);
+            background: rgba(168, 85, 247, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-label {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .btn-subtext {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer {
+            margin-top: 80px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 600px) {
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-glow"></div>
+
+    <div class="container">
+        <h1>KERLYSS</h1>
+        <p class="subtitle">UNIFIED MUSIC ECOSYSTEM</p>
+
+        <div class="download-grid">
+            <a href="https://github.com/UnExpectedd0/Kerlyss-Release/releases/latest/download/Kerlyss-Android.apk" class="download-card">
+                <div class="icon">🤖</div>
+                <div class="btn-label">Android</div>
+                <div class="btn-subtext">Download APK</div>
+            </a>
+
+            <a href="https://github.com/UnExpectedd0/Kerlyss-Release/releases/latest/download/Kerlyss-Windows.zip" class="download-card">
+                <div class="icon">🪟</div>
+                <div class="btn-label">Windows</div>
+                <div class="btn-subtext">Download ZIP</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            DEVELOPED BY UNEXPECTEDD0
+        </div>
+    </div>
+</body>
+</html>
