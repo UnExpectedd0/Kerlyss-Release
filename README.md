@@ -1,6 +1,6 @@
 # 🎵 Kerlyss | Official Releases
 
-[![Version](https://img.shields.io/badge/version-v0.2.1-purple.svg)](https://github.com/UnExpectedd0/Kerlyss-Release/releases)
+[![Version](https://img.shields.io/badge/version-v0.2.2-purple.svg)](https://github.com/UnExpectedd0/Kerlyss-Release/releases)
 [![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Windows-blue.svg)](#installation)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 

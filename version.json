@@ -1,4 +1,4 @@
 {
-  "version": "0.2.1",
-  "releaseNotes": "Initial public release of Kerlyss! Unified local and streaming music."
+  "version": "0.2.2",
+  "releaseNotes": "Added Music BPM Aggregator with automated tempo discovery, Tap to BPM dialog, and stunning UI improvements in the Mini Player."
 }
