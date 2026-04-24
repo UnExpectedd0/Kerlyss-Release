@@ -9,146 +9,278 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0c0c0c;
+            --bg-color: #08080c;
             --accent-purple: #a855f7;
             --accent-cyan: #22d3ee;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
             background-color: var(--bg-color);
-            color: white;
+            color: var(--text-main);
             font-family: 'Outfit', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        .background-glow {
+        /* Dynamic Background */
+        .bg-layer {
             position: fixed;
-            top: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .icon-blob {
+            position: absolute;
+            top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80vw;
-            height: 80vh;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(12, 12, 12, 0) 70%);
-            z-index: -1;
-            filter: blur(100px);
+            width: 800px;
+            height: 800px;
+            background: url('assets/icon.png') no-repeat center;
+            background-size: contain;
+            filter: blur(120px) opacity(0.3);
+            animation: rotateBlob 30s linear infinite;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+        }
+
+        @keyframes rotateBlob {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .container {
-            text-align: center;
-            max-width: 800px;
-            padding: 40px;
-        }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -2px;
-            background: linear-gradient(to right, #fff, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p.subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 50px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .download-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
             width: 100%;
-        }
-
-        .download-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 40px 20px;
-            border-radius: 30px;
-            backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-            color: white;
+            max-width: 1200px;
+            padding: 80px 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        /* Header */
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            animation: fadeInDown 1s forwards;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container img {
+            width: 80px;
+            height: 80px;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -3px;
+            background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        /* Download Section */
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            width: 100%;
+            max-width: 800px;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .download-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 48px 32px;
+            text-align: center;
+            backdrop-filter: blur(40px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: translateX(-100%);
+            transition: 0.8s;
+        }
+
+        .download-card:hover::before {
+            transform: translateX(100%);
+        }
+
         .download-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-purple);
-            background: rgba(168, 85, 247, 0.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        .platform-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+            display: block;
         }
 
-        .btn-label {
+        .platform-name {
+            font-size: 1.8rem;
             font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            display: block;
         }
 
-        .btn-subtext {
+        .download-sub {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        /* Features Bar */
+        .features-strip {
+            margin-top: 100px;
+            display: flex;
+            gap: 48px;
+            opacity: 0.4;
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .footer {
-            margin-top: 80px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.3);
+            margin-top: auto;
+            padding: 40px;
+            color: var(--text-dim);
+            font-size: 0.8rem;
             letter-spacing: 2px;
         }
 
-        @media (max-width: 600px) {
-            .download-grid {
-                grid-template-columns: 1fr;
-            }
-            h1 { font-size: 3rem; }
+        .version-badge {
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--accent-purple);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 24px;
+            display: inline-block;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .download-grid { grid-template-columns: 1fr; }
+            .icon-blob { width: 400px; height: 400px; }
         }
     </style>
 </head>
 <body>
-    <div class="background-glow"></div>
+    <div class="bg-layer">
+        <div class="icon-blob"></div>
+        <div class="gradient-overlay"></div>
+    </div>
 
     <div class="container">
-        <h1>KERLYSS</h1>
-        <p class="subtitle">UNIFIED MUSIC ECOSYSTEM</p>
+        <header class="hero">
+            <div class="logo-container" style="margin-left: auto; margin-right: auto;">
+                <img src="assets/icon.png" alt="Kerlyss Logo">
+            </div>
+            <h1>KERLYSS</h1>
+            <p class="tagline">Unified Music Ecosystem</p>
+            <div class="version-badge">v0.2.2 RELEASE</div>
+        </header>
 
-        <div class="download-grid">
+        <main class="download-grid">
             <a href="https://github.com/UnExpectedd0/Kerlyss-Release/releases/latest/download/Kerlyss-Android.apk" class="download-card">
-                <div class="icon">🤖</div>
-                <div class="btn-label">Android</div>
-                <div class="btn-subtext">Download APK</div>
+                <span class="platform-icon">🤖</span>
+                <span class="platform-name">Android</span>
+                <span class="download-sub">DOWNLOAD APK</span>
             </a>
 
             <a href="https://github.com/UnExpectedd0/Kerlyss-Release/releases/latest/download/Kerlyss-Windows.zip" class="download-card">
-                <div class="icon">🪟</div>
-                <div class="btn-label">Windows</div>
-                <div class="btn-subtext">Download ZIP</div>
+                <span class="platform-icon">🪟</span>
+                <span class="platform-name">Windows</span>
+                <span class="download-sub">DOWNLOAD PORTABLE</span>
             </a>
+        </main>
+
+        <div class="features-strip">
+            <span>FLAC SUPPORT</span>
+            <span>SPOTIFY MIRROR</span>
+            <span>YT ENGINE</span>
+            <span>AETHER UI</span>
         </div>
 
-        <div class="footer">
-            DEVELOPED BY UNEXPECTEDD0
-        </div>
+        <footer class="footer">
+            © 2024 UNEXPECTEDD0 • DESIGNED WITH AETHER
+        </footer>
     </div>
 </body>
 </html>
